@@ -43,3 +43,4 @@ Connect your GitHub repository to Vercel and it will detect the Vite/React setup
 ---
 
 *Built with purpose. Showing up with kindness, on purpose.*
+
