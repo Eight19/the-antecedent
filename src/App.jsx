@@ -1298,7 +1298,6 @@ export default function TheAntecedent(){
   useEffect(()=>LS.set("ta_history",pointsHistory),[pointsHistory]);
   useEffect(()=>LS.set("ta_profile",profile),[profile]);
   useEffect(()=>LS.set("ta_study",studyDone),[studyDone]);
-```
 
   const markStudyDone=(code)=>setStudyDone(p=>({...p,[code]:true}));
 
