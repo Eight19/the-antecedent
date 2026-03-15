@@ -397,7 +397,7 @@ const DAILY_NOTES = [
 
 
 
-// ─── RESOURCES ─────────────────────────────────────────────────────
+// ─── RESOURCES ───────────────────────────────────────────────────────
 const RESOURCES = [
   { category:"Official BACB Resources", color:C.walnut, items:[
     { title:"BACB Website",                      desc:"Certification requirements, ethics code, task lists, continuing education", url:"https://www.bacb.com" },
@@ -521,6 +521,48 @@ function Tag({label,color}){
 
 function CategoryDot({color}){
   return <span style={{display:"inline-block",width:7,height:7,borderRadius:"50%",background:color,flexShrink:0}}/>;
+}
+
+// ─── SPLASH SCREEN ───────────────────────────────────────────────────
+function SplashScreen({onEnter}){
+  const [vis,setVis]=useState(false);
+  useEffect(()=>{const t=setTimeout(()=>setVis(true),60);return()=>clearTimeout(t);},[]);
+
+  return (
+    <div style={{minHeight:"100vh",background:`linear-gradient(170deg,${C.espresso} 0%,${C.walnut} 45%,${C.umber} 100%)`,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"space-between",padding:"64px 28px 56px",position:"relative",overflow:"hidden",opacity:vis?1:0,transition:"opacity 0.6s ease"}}>
+      <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Lora:ital,wght@1,400;0,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+
+      {/* Subtle texture rings */}
+      {[{s:300,t:-80,l:-100,o:0.04},{s:220,b:80,r:-50,o:0.05}].map((r,i)=>(
+        <div key={i} style={{position:"absolute",width:r.s,height:r.s,borderRadius:"50%",border:`1px solid ${C.terra}`,opacity:r.o,top:r.t,left:r.l,right:r.r,bottom:r.b,pointerEvents:"none"}}/>
+      ))}
+
+      {/* Wordmark */}
+      <div style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",width:"100%",maxWidth:360,textAlign:"center"}}>
+        <div style={{width:64,height:2,background:`${C.terra}66`,margin:"0 auto 32px",borderRadius:1}}/>
+        <div style={{display:"flex",alignItems:"baseline",gap:6,marginBottom:12,justifyContent:"center"}}>
+          <span style={{fontFamily:"'Playfair Display',serif",fontSize:"13px",color:"rgba(255,255,255,0.45)",fontWeight:400,letterSpacing:"0.14em",textTransform:"uppercase"}}>The</span>
+          <span style={{fontFamily:"'Playfair Display',serif",fontSize:"42px",color:C.white,fontWeight:700,letterSpacing:"-0.01em",lineHeight:1}}>Antecedent</span>
+        </div>
+        <div style={{fontFamily:"'Lora',serif",fontStyle:"italic",fontSize:"17px",color:"rgba(255,255,255,0.65)",letterSpacing:"0.02em",marginBottom:36}}>
+          Showing up with kindness, on purpose.
+        </div>
+        <div style={{width:32,height:1,background:"rgba(255,255,255,0.15)",margin:"0 auto 28px"}}/>
+        <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"13px",color:"rgba(255,255,255,0.5)",lineHeight:1.85,maxWidth:280,margin:0}}>
+          Before anything changes — something has to come first.
+        </p>
+      </div>
+
+      {/* Enter button */}
+      <button onClick={onEnter} style={{width:"100%",maxWidth:300,padding:"15px 0",borderRadius:14,background:C.terra,border:"none",cursor:"pointer",color:C.white,fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:"15px",letterSpacing:"0.02em",boxShadow:`0 8px 24px ${C.terra}44`}}>
+        Enter
+      </button>
+
+      <div style={{fontFamily:"'Lora',serif",fontStyle:"italic",fontSize:"10px",color:"rgba(255,255,255,0.2)",marginTop:16,letterSpacing:"0.04em"}}>
+        1 John 3:17–18
+      </div>
+    </div>
+  );
 }
 
 // ─── ONBOARDING ──────────────────────────────────────────────────────
@@ -1644,6 +1686,7 @@ const LS = {
 // ─── MAIN APP ────────────────────────────────────────────────────────
 export default function TheAntecedent(){
   const [onboarded,setOnboarded]=useState(()=>LS.get("ta_onboarded",false));
+  const [showSplash,setShowSplash]=useState(true);
   const [tab,setTab]=useState(()=>LS.get("ta_tab","home"));
   const [popup,setPopup]=useState(null);
   const [saved,setSaved]=useState(()=>new Set(LS.get("ta_saved",[])));
@@ -1731,6 +1774,8 @@ export default function TheAntecedent(){
     addPoints("shareWin");
   };
 
+  // Show splash every time app opens — then onboarding if first time, then app
+  if(showSplash) return <SplashScreen onEnter={()=>setShowSplash(false)}/>;
   if(!onboarded) return <Onboarding onDone={()=>setOnboarded(true)}/>;
 
   const TABS=[
