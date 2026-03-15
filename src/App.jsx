@@ -1279,16 +1279,26 @@ function MeTab({profile,setProfile,points,pointsHistory,saved}){
 }
 
 // ─── MAIN APP ────────────────────────────────────────────────────────
+const LS={get:(k,def)=>{try{const v=localStorage.getItem(k);return v!==null?JSON.parse(v):def;}catch{return def;}},set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch{}},};
+
 export default function TheAntecedent(){
-  const [onboarded,setOnboarded]=useState(false);
-  const [tab,setTab]=useState("home");
+  const [onboarded,setOnboarded]=useState(()=>LS.get("ta_onboarded",false));
+  const [tab,setTab]=useState(()=>LS.get("ta_tab","home"));
   const [popup,setPopup]=useState(null);
-  const [saved,setSaved]=useState(new Set());
-  const [points,setPoints]=useState(0);
-  const [pointsHistory,setPointsHistory]=useState([]);
-  const [profile,setProfile]=useState({name:"",role:"",org:"",favs:"",goal:""});
-  const [studyDone,setStudyDone]=useState({});
+  const [saved,setSaved]=useState(()=>new Set(LS.get("ta_saved",[])));
+  const [points,setPoints]=useState(()=>LS.get("ta_points",0));
+  const [pointsHistory,setPointsHistory]=useState(()=>LS.get("ta_history",[]));
+  const [profile,setProfile]=useState(()=>LS.get("ta_profile",{name:"",role:"",org:"",favs:"",goal:""}));
+  const [studyDone,setStudyDone]=useState(()=>LS.get("ta_study",{}));
   const hasInit=useRef(false);
+  useEffect(()=>LS.set("ta_onboarded",onboarded),[onboarded]);
+  useEffect(()=>LS.set("ta_tab",tab),[tab]);
+  useEffect(()=>LS.set("ta_saved",[...saved]),[saved]);
+  useEffect(()=>LS.set("ta_points",points),[points]);
+  useEffect(()=>LS.set("ta_history",pointsHistory),[pointsHistory]);
+  useEffect(()=>LS.set("ta_profile",profile),[profile]);
+  useEffect(()=>LS.set("ta_study",studyDone),[studyDone]);
+```
 
   const markStudyDone=(code)=>setStudyDone(p=>({...p,[code]:true}));
 
@@ -1343,5 +1353,6 @@ export default function TheAntecedent(){
         ))}
       </div>
     </div>
+    
   );
 }
