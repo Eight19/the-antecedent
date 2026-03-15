@@ -381,7 +381,7 @@ export const BCBA_DOMAINS = [
         fl:{f:"What is procedural integrity and how is it assessed?",b:"Procedural integrity: degree to which a procedure is implemented as designed\n\nAssessed by:\n• Direct observation with implementation checklist\n• Score each step: implemented or not\n• Calculate % steps correctly implemented\n\nLow integrity + low progress: fix implementation first\nHigh integrity + low progress: modify the program design"},
       },
     ]},
-    { key:"D",label:"Experimental Design",emoji:"🔬",color:coral,glow:C.peach,q:13,pct:"7%",tasks:[
+    { key:"D",label:"Experimental Design",emoji:"🔬",color:coral,glow:"#F9C89B",q:13,pct:"7%",tasks:[
       { code:"D-1",title:"Dependent & Independent Variables",
         lesson:"Independent variable (IV): what is manipulated (the intervention). Dependent variable (DV): what is measured (the behavior). A functional relationship exists when IV changes reliably produce DV changes.",
         why:"Understanding IV/DV is foundational to experimental design, program evaluation, and evidence-based practice.",
@@ -821,7 +821,7 @@ export const BCBA_DOMAINS = [
         fl:{f:"How does equivalence-based instruction increase teaching efficiency?",b:"Standard instruction: train each stimulus-stimulus relation directly\n→ Train 6 relations → learn 6 relations\n\nEquivalence-based instruction:\n→ Train 2 relations (AB + AC) → derive up to 6 (AB, BA, AC, CA, BC, CB)\n→ Symmetry and transitivity produce untrained relations for free\n\nResult: dramatically more learning from less direct training"},
       },
     ]},
-    { key:"H",label:"Selecting & Implementing Interventions",emoji:"🎯",color:coral,glow:C.peach,q:20,pct:"11%",tasks:[
+    { key:"H",label:"Selecting & Implementing Interventions",emoji:"🎯",color:coral,glow:"#F9C89B",q:20,pct:"11%",tasks:[
       { code:"H-1",title:"Develop Observable & Measurable Goals",
         lesson:"Intervention goals must specify observable behavior, conditions, criterion, and consistency — enabling objective progress measurement by any trained observer.",
         why:"Unmeasurable goals cannot be evaluated. Unevaluated goals cannot be improved. Vague goals waste clinical investment.",
