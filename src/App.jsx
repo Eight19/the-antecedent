@@ -1343,7 +1343,7 @@ export default function TheAntecedent(){
       </div>
 
       {/* Bottom navigation — text only, no emojis */}
-      <div style={{position:"fixed",bottom:0,left:"50%",transform:"translateX(-50%)",width:"100%",maxWidth:480,background:`rgba(250,246,239,0.96)`,backdropFilter:"blur(16px)",borderTop:`1px solid ${C.sand}`,display:"flex",padding:"10px 0 14px",zIndex:50}}>
+      <div style={{position:"fixed",bottom:0,left:"50%",transform:"translateX(-50%)",width:"100%",maxWidth:480,background:"rgba(250,246,239,0.96)",backdropFilter:"blur(16px)",borderTop:`1px solid ${C.sand}`,display:"flex",padding:"10px 0 14px",zIndex:50}}>
         {TABS.map(t=>(
           <button key={t.id} onClick={()=>setTab(t.id)} style={{flex:1,background:"none",border:"none",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:2,fontFamily:"'DM Sans',sans-serif",padding:"2px 0"}}>
             {/* Active indicator dot instead of emoji */}
