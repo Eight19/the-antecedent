@@ -5,7 +5,7 @@ const teal='#5A9E9E', plum='#7B5EA7', coral='#E8845A',
   rose='#D4607A', gold='#E8B84B', sage='#7BAE8B',
   navy='#1a3a5c';
 
-  export const BCBA_DOMAINS = [
+export const BCBA_DOMAINS = [
     { key:"A",label:"Behaviorism & Philosophical Foundations",emoji:"🧠",color:teal,glow:"#A8D8D8",q:8,pct:"5%",tasks:[
       { code:"A-1",title:"Goals of Behavior Analysis",
         lesson:"The three scientific goals of behavior analysis are description (systematically observing what behavior occurs), prediction (identifying conditions reliably correlated with behavior), and control (demonstrating functional relationships through experimental manipulation).",
@@ -960,4 +960,4 @@ const teal='#5A9E9E', plum='#7B5EA7', coral='#E8845A',
         fl:{f:"What data should BCBAs collect to evaluate supervision effectiveness?",b:"Supervisee outcomes:\n• Procedural integrity scores over time\n• Skill competency assessments\n• Professional development progress\n\nClient outcomes:\n• Progress toward behavior goals\n• Safety incidents\n• Service quality measures\n\nSupervision process:\n• Contact frequency and duration\n• Topics covered, feedback given\n• Supervisee satisfaction\n\nUltimate measure: client welfare"},
       },
     ]},
-
+];
