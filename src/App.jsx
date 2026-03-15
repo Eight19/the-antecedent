@@ -397,7 +397,7 @@ const DAILY_NOTES = [
 
 
 
-// ─── RESOURCES ───────────────────────────────────────────────────────
+sed -i '400s|// ─── RESOURCES ─*|// ─── RESOURCES ──────────────────────────────────────────────────────\nconst RESOURCES = [|' src/App.jsx
   { category:"Official BACB Resources", color:C.walnut, items:[
     { title:"BACB Website",                      desc:"Certification requirements, ethics code, task lists, continuing education", url:"https://www.bacb.com" },
     { title:"BACB Ethics Code for RBTs",          desc:"The complete ethics code every RBT must know — read it, bookmark it",     url:"https://www.bacb.com/rbt-ethics-code/" },
