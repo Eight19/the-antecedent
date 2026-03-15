@@ -1652,6 +1652,7 @@ export default function TheAntecedent(){
   const [profile,setProfile]=useState(()=>LS.get("ta_profile",{name:"",role:"",org:"",favs:"",goal:"",certified:"",pursuing:"",credential:"",examDate:"",workStart:"",birthday:"",milestonesLogged:[]}));
   const [studyDone,setStudyDone]=useState(()=>LS.get("ta_study",{}));
   const hasInit=useRef(false);
+  const markStudyDone=(code)=>setStudyDone(p=>({...p,[code]:true}));
 
   // Persist all state to localStorage whenever it changes
   useEffect(()=>LS.set("ta_onboarded",onboarded),[onboarded]);
