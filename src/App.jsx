@@ -97,12 +97,33 @@ const MESSAGES = [
   { id:12, cat:"encouragement", color:C.terra,
     title:"The first ninety days are the hardest.",
     body:"The learning curve is steep, the emotions are big, and you will question yourself. That is completely normal. Every skilled clinician you admire felt exactly what you're feeling right now. Keep going.", tag:"New Staff" },
-  { id:13, cat:"celebrate",     color:C.copper,
-    title:"Happy Work Anniversary",
-    body:"Every year in this field is a year of showing up for children and families who needed you. Work anniversaries in ABA are not just milestones — they are a testament to your heart and your resilience.", tag:"Celebration" },
-  { id:14, cat:"celebrate",     color:C.copper,
-    title:"You passed your RBT Exam.",
-    body:"You studied, you prepared, and you showed up for that exam the same way you show up for your clients — with everything you have got. RBT Certified. That title belongs to you. We are so proud of you.", tag:"Milestone" },
+  { id:13, cat:"pause", color:C.sage,
+    title:"Before you walk in, come back to your body.",
+    body:"Before you open that door, you have two minutes. Use them. Sit in the car or stand outside and try this: breathe in for four counts, hold for seven, release for eight. Do it twice. Feel your feet on the ground. Roll your shoulders back once — slowly — and let them drop. Notice three things you can see right now and name them quietly to yourself. That is it. That is the whole thing. What you just did is not a luxury. It is a clinical tool. The quality of your presence in the next hour depends on the quality of your arrival. A regulated nervous system is not something you bring to session by accident — it is something you choose, deliberately, in the two minutes before you begin. Your client will feel the difference before you say a single word. Come back to your body. Then go in.", tag:"Pause & Reset" },
+  { id:14, cat:"pause", color:C.terra,
+    title:"How to leave a hard session behind.",
+    body:"After a hard session, your body holds what your mind has not finished processing yet. The tension in your jaw. The tightness across your shoulders. The way you are still running the session in your head on the drive home. That is normal. That is what genuine presence costs. But you do not have to carry it indefinitely. Try this before you start the car: take one slow breath and name what happened — not to analyze it, just to acknowledge it. That was hard. Then do a slow shoulder roll, forward and back. Shake out your hands if you need to. If you have five minutes, walk around the block once. Movement helps your nervous system complete what stress started. If the session is still with you tonight, write it down — one sentence, just the fact of it — and set it aside for supervision. You thought about your client. You cared. Now let your body know it is allowed to rest.", tag:"Pause & Reset" },
+  { id:21, cat:"pause", color:C.sage,
+    title:"Box breathing. Four counts. Right now.",
+    body:"You can do this anywhere — in the car, in a bathroom, in thirty seconds between sessions. Breathe in for four counts. Hold for four counts. Breathe out for four counts. Hold for four counts. That is one box. Do three. What is happening in your body when you do this is not small. You are directly signaling your nervous system to downshift. Your heart rate slows. The cortisol that spiked in that last session starts to clear. Box breathing does not fix what was hard. It does not erase the difficulty. But it brings you back into your body, back into the present moment, back to a place where you can think clearly and choose what comes next. Four counts in. Four counts hold. Four counts out. Four counts hold. You have time for this. Do it now.", tag:"Pause & Reset" },
+  { id:22, cat:"pause", color:C.copper,
+    title:"Your shoulders are up near your ears again.",
+    body:"Check right now. Are your shoulders raised? Is your jaw clenched? Is your chest shallow? This is what sustained stress looks like in the body — not dramatic, not obvious, just a slow accumulation of held tension that becomes so familiar you stop noticing it. Here is a reset: drop your shoulders deliberately, all the way down. Roll them back slowly, then forward. Tip your head gently to the right and hold for five seconds. Then to the left. Lift your chin and look up at the ceiling for a moment. Now roll your neck in a slow half circle, ear to shoulder to chest to shoulder. These are not just stretches. They are a message to your nervous system that it is safe to release. You can do this in a car, at a desk, standing in a hallway. Thirty seconds. Your body has been working hard. Give it this.", tag:"Pause & Reset" },
+  { id:23, cat:"pause", color:C.sage,
+    title:"Ground yourself before it escalates.",
+    body:"When you feel yourself starting to tighten — the session is getting hard, the family is upset, your own regulation is slipping — try this quietly, right where you are. Name five things you can see. Four things you can physically feel right now — your feet on the floor, the texture of your clothes, the air on your skin. Three things you can hear. Two things you can smell. One thing you can taste. This is a grounding technique called 5-4-3-2-1, and it works by pulling your attention out of the stress loop in your mind and back into the sensory present. You cannot be fully dysregulated and fully present at the same time. The senses are always in the now. Use them. No one needs to know you are doing it. It takes less than sixty seconds. It can change the entire texture of what comes next.", tag:"Pause & Reset" },
+  { id:24, cat:"pause", color:C.umber,
+    title:"Five minutes of walking is not a waste of time.",
+    body:"Between sessions, when you have a few minutes and the temptation is to sit in your car and scroll — walk instead. Around the block, across the parking lot, down the street and back. It does not need to be long. It does not need to be purposeful. The movement itself is the point. Walking after a stressful event helps your body metabolize the cortisol that stress produced. It shifts your nervous system out of the fight-or-flight response that clinical work can quietly activate. It gives your eyes something new to look at, your lungs something larger to breathe, your legs something to do with the energy that hard sessions generate but do not discharge. You will arrive at your next session clearer, calmer, and more present than you would have been if you had stayed in the car. Five minutes. That is enough.", tag:"Pause & Reset" },
+  { id:25, cat:"pause", color:C.terra,
+    title:"Your body is already in the room before you speak.",
+    body:"Before you enter a session, take one moment to check your posture. Are your arms crossed? Is your brow furrowed? Is your weight shifted back, away from the client? These things communicate something whether you intend them to or not. Children especially read body language before they read words. An open posture — weight forward, arms loose, face soft — signals safety. It says: I am not a threat. I am not stressed. I have time for you. This is not about performance. It is about alignment. When your body communicates calm and openness, your nervous system tends to follow. The posture comes first, and the internal state often catches up. Before you begin, uncross your arms, soften your jaw, and breathe out slowly. Let your body say what you want the session to feel like. Then begin.", tag:"Pause & Reset" },
+  { id:27, cat:"pause", color:C.umber,
+    title:"Your tone of voice is a clinical instrument.",
+    body:"The words you choose matter. But the way you say them matters more than most clinicians are trained to notice. A warm, steady tone communicates safety even when the content is corrective. A tight, rushed tone communicates stress even when the words are kind. Before a session, take a moment to check your voice. Speak one sentence out loud — to yourself, quietly — and notice how it sounds. Is it clipped? Flat? Higher than usual? These are signals from your nervous system, not character flaws. Slow down slightly. Lower your register just a degree. Soften the edges of your words. Your clients are reading the music of how you speak at least as much as the lyrics. A regulated tone is not just pleasant — it is therapeutic. It is part of what makes people feel safe enough to learn.", tag:"Pause & Reset" },
+  { id:26, cat:"pause", color:C.sage,
+    title:"Progressive muscle relaxation. Start at your feet.",
+    body:"This one works best when you have five minutes — in the car before a session, during a lunch break, or at the end of a hard day. Starting at your feet, tense the muscles in your toes and feet as hard as you can for five seconds. Then release completely. Move to your calves — tense for five, release. Thighs. Stomach. Hands — make tight fists. Forearms. Shoulders — shrug them up to your ears. Face — scrunch everything. At each release, notice the difference between tension and the absence of it. That contrast is the point. What you are doing is teaching your body, muscle group by muscle group, what it actually feels like to let go. Many people in high-stress work have forgotten. The body holds what the mind does not finish processing. This is one way to help it release. Five minutes. Start at your feet.", tag:"Pause & Reset" },
   { id:15, cat:"wellness",      color:C.terra,
     title:"End your day with intention.",
     body:"Before you close your session notes, name one thing that went well today. Not for the data — for you. This small practice, done consistently, is one of the most powerful burnout prevention tools we know of.", tag:"Daily Practice" },
@@ -170,7 +191,7 @@ const CELEBRATIONS = {
       ? "One year. Do you know what that means in this field? It means you stayed when it was hard. It means you came back after the sessions that broke your heart a little. It means you found something worth returning to — in the clients, in the work, in yourself. One year is not nothing. One year is a foundation."
       : years <= 3
       ? `${years} years. You have seen enough now to know that this work does not get easier — it gets deeper. You understand things now that you could not have understood when you started. You carry things too, things nobody prepares you for. But you are still here, still showing up, still choosing this. That is not habit. That is character.`
-      : `${years} years in this field. The clients you served in year one are different now — older, more capable, carrying skills you helped build into them. Some of them are in classrooms. Some of them are having conversations they could not have had before you. You will never see most of that. But it happened. It is happening. And it is partly because you stayed.`
+      : `${years} years in this field. The children you served in year one are different now — older, more capable, carrying skills you helped build into them. Some of them are in classrooms. Some of them are having conversations they could not have had before you. You will never see most of that. But it happened. It is happening. And it is partly because you stayed.`
     }`,
   }),
 };
@@ -377,8 +398,7 @@ const DAILY_NOTES = [
 
 
 // ─── RESOURCES ───────────────────────────────────────────────────────
-const RESOURCES = [  
-{ category:"Official BACB Resources", color:C.walnut, items:[
+  { category:"Official BACB Resources", color:C.walnut, items:[
     { title:"BACB Website",                      desc:"Certification requirements, ethics code, task lists, continuing education", url:"https://www.bacb.com" },
     { title:"BACB Ethics Code for RBTs",          desc:"The complete ethics code every RBT must know — read it, bookmark it",     url:"https://www.bacb.com/rbt-ethics-code/" },
     { title:"BACB Ethics Code for BCBAs/BCaBAs",  desc:"Full ethics code for supervisor-level practitioners",                      url:"https://www.bacb.com/ethics/ethics-codes/" },
@@ -621,7 +641,7 @@ function KindnessPopup({msg,onClose,onSave,saved}){
   useEffect(()=>{const t=setTimeout(()=>setVis(true),40);return()=>clearTimeout(t);},[]);
   const close=()=>{setExit(true);setTimeout(onClose,380);};
 
-  const catColors={encouragement:C.terra,wellness:C.sage,education:C.umber,celebrate:C.copper};
+  const catColors={encouragement:C.terra,wellness:C.sage,education:C.umber,pause:C.sage};
   const accent=catColors[msg.cat]||C.terra;
 
   return (
@@ -1204,7 +1224,7 @@ const CAT_CONFIG={
   encouragement:{ label:"Encouragement", color:C.terra,  bg:`${C.terra}0A` },
   wellness:     { label:"Wellness",      color:C.sage,   bg:`${C.sage}0A`  },
   education:    { label:"Education",     color:C.umber,  bg:`${C.umber}0A` },
-  celebrate:    { label:"Celebrate",     color:C.copper, bg:`${C.copper}0A`},
+  pause:        { label:"Pause & Reset", color:C.sage,   bg:`${C.sage}0A`  },
 };
 
 function LearnTab({saved,setSaved,addPoints,studyDone,markStudyDone}){
@@ -1632,9 +1652,7 @@ export default function TheAntecedent(){
   const [studyDone,setStudyDone]=useState(()=>LS.get("ta_study",{}));
   const hasInit=useRef(false);
 
-  const markStudyDone=(code)=>setStudyDone(p=>({...p,[code]:true}));
-
-  // Persist all state  
+  // Persist all state to localStorage whenever it changes
   useEffect(()=>LS.set("ta_onboarded",onboarded),[onboarded]);
   useEffect(()=>LS.set("ta_tab",tab),[tab]);
   useEffect(()=>LS.set("ta_saved",[...saved]),[saved]);
