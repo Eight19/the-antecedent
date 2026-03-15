@@ -5,7 +5,7 @@ const teal='#5A9E9E', plum='#7B5EA7', coral='#E8845A',
   rose='#D4607A', gold='#E8B84B', sage='#7BAE8B',
   navy='#1a3a5c';
 
-export const BCBA_DOMAINS = [
+export const BCABA_DOMAINS = [
     { key:"A",label:"Behaviorism & Philosophical Foundations",emoji:"🧠",color:teal,glow:"#A8D8D8",q:8,pct:"5%",tasks:[
       { code:"A-1",title:"Goals of Behavior Analysis",
         lesson:"The three scientific goals of behavior analysis are description (systematically observing what behavior occurs), prediction (identifying conditions reliably correlated with behavior), and control (demonstrating functional relationships through experimental manipulation).",
