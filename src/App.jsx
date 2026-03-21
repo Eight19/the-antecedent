@@ -400,30 +400,30 @@ const DAILY_NOTES = [
 // ─── RESOURCES ───────────────────────────────────────────────────────
 const RESOURCES = [
   { category:"Official BACB Resources", color:C.walnut, items:[
-    { title:"BACB Website",                      desc:"Certification requirements, ethics code, task lists, continuing education", url:"https://www.bacb.com" },
-    { title:"BACB Ethics Code for RBTs",          desc:"The complete ethics code every RBT must know — read it, bookmark it",     url:"https://www.bacb.com/rbt-ethics-code/" },
-    { title:"BACB Ethics Code for BCBAs/BCaBAs",  desc:"Full ethics code for supervisor-level practitioners",                      url:"https://www.bacb.com/ethics/ethics-codes/" },
-    { title:"RBT Task List (3rd Edition)",         desc:"The official content outline for the RBT exam — effective 2026",          url:"https://www.bacb.com/rbt-task-list/" },
-    { title:"BACB Newsletter",                    desc:"Stay current on policy updates, research, and field news",                  url:"https://www.bacb.com/bacb-newsletter/" },
+    { title:"BACB Website",                        desc:"Certification requirements, ethics code, task lists, continuing education", url:"https://www.bacb.com" },
+    { title:"Ethics Code — All Credentials",        desc:"RBT, BCaBA, and BCBA ethics codes — read it, know it, live it",           url:"https://www.bacb.com/rbt/?topic=rbt-ethics#rbtResourceCarousel" },
+    { title:"RBT Test Content Outline (3rd Ed)",    desc:"The official RBT exam content outline — effective January 1, 2026",        url:"https://www.bacb.com/test-content-outlines-for-bacb-certifications/" },
+    { title:"BCaBA Test Content Outline (6th Ed)",  desc:"All 90 tasks across 9 domains — the official BCaBA exam blueprint",        url:"https://www.bacb.com/wp-content/bcaba-outline-6thEd/" },
+    { title:"BCBA Test Content Outline (6th Ed)",   desc:"All 104 tasks across 9 domains — the official BCBA exam blueprint",        url:"https://www.bacb.com/wp-content/uploads/2022/01/BCBA-6th-Edition-Test-Content-Outline-240903-a.pdf" },
+    { title:"BACB Newsletters",                     desc:"Stay current on policy updates, research, and field news",                  url:"https://www.bacb.com/newsletters/" },
   ]},
   { category:"Essential Books", color:C.umber, items:[
-    { title:"Applied Behavior Analysis — Cooper, Heron & Heward", desc:"The gold standard textbook. If you own one ABA book, it's this one.", url:"https://www.pearson.com/en-us/subject-catalog/p/applied-behavior-analysis/P200000003498" },
-    { title:"The ABA Big Book — Michael Maloney",                  desc:"Accessible and excellent for RBT and BCBA exam prep",               url:"https://www.amazon.com/ABA-BIG-BOOK-Michael-Maloney/dp/0966843517" },
+    { title:"Applied Behavior Analysis — Cooper, Heron & Heward", desc:"The gold standard textbook. If you own one ABA book, this is it.", url:"https://www.amazon.com/Applied-Behavior-Analysis-John-Cooper/dp/0134752554" },
+    { title:"Ethics for Behavior Analysts — Bailey & Burch",       desc:"The most practical ethics guide for everyday ABA practice — 4th edition", url:"https://www.amazon.com/Ethics-Behavior-Analysts-Jon-Bailey/dp/1032056428" },
     { title:"Verbal Behavior — B.F. Skinner",                      desc:"The foundational text for understanding language through behavioral analysis", url:"https://www.amazon.com/Verbal-Behavior-B-F-Skinner/dp/1614278121" },
-    { title:"Ethics for Behavior Analysts — Bailey & Burch",       desc:"The most practical ethics guide for everyday ABA practice",         url:"https://www.routledge.com/Ethics-for-Behavior-Analysts/Bailey-Burch/p/book/9781138038370" },
-    { title:"Behavioral Skills Training — Parsons, Rollyson & Reid",desc:"The definitive guide to BST — the supervision method you will use and receive", url:"https://www.amazon.com/Behavioral-Skills-Training-Program-Implementation/dp/0398092087" },
+    { title:"Behavior Modification — Miltenberger",                 desc:"Accessible and comprehensive — widely used in BCBA coursework",             url:"https://www.amazon.com/Behavior-Modification-Principles-Procedures-Miltenberger/dp/1305109430" },
   ]},
   { category:"YouTube Channels", color:C.terra, items:[
-    { title:"ABA Exam Review",                     desc:"Clear, high-quality exam prep for RBT and BCBA — one of the best free resources available", url:"https://www.youtube.com/@ABAExamReview" },
-    { title:"Behavior Analyst Certification Board", desc:"Official BACB channel — ethics webinars, policy updates, professional development",        url:"https://www.youtube.com/@TheBACB" },
-    { title:"Dr. Mary Barbera — Turn Autism Around",desc:"Verbal behavior and parent training content — accessible and practical",                   url:"https://www.youtube.com/@DrMaryBarbera" },
-    { title:"Autism Partnership Foundation",        desc:"Evidence-based ABA explanations, research discussions, and clinical content",                url:"https://www.youtube.com/@AutismPartnershipFoundation" },
+    { title:"Dr. Mary Barbera — Turn Autism Around", desc:"Verbal behavior, parent training, and practical ABA content",                             url:"https://www.youtube.com/@marybarbera" },
+    { title:"Behavior Analyst Certification Board",   desc:"Official BACB channel — ethics webinars, policy updates, professional development",       url:"https://www.youtube.com/@Bacbofficial" },
+    { title:"ABA Exam Review",                        desc:"Clear, high-quality exam prep for RBT and BCBA — one of the best free resources",         url:"https://www.youtube.com/@ABAExamReview" },
+    { title:"Autism Partnership Foundation",          desc:"Evidence-based ABA explanations, research discussions, and clinical content",              url:"https://www.youtube.com/@AutismPartnershipFoundation" },
   ]},
   { category:"Career & Professional Growth", color:C.sage, items:[
-    { title:"BACB Supervision Requirements", desc:"Step-by-step guide to finding a qualified supervisor for your BCBA hours",          url:"https://www.bacb.com/supervision/" },
-    { title:"CEU Requirements & Providers",  desc:"Everything you need to know about maintaining your certification",                   url:"https://www.bacb.com/continuing-education/" },
+    { title:"BACB Supervision Requirements",        desc:"Step-by-step guide to supervision hours and finding a qualified supervisor", url:"https://www.bacb.com/supervision/" },
+    { title:"CEU Requirements & Providers",         desc:"Everything you need to know about maintaining your certification",           url:"https://www.bacb.com/continuing-education/" },
     { title:"Journal of Applied Behavior Analysis", desc:"The premier peer-reviewed journal in ABA — free access to many articles",   url:"https://onlinelibrary.wiley.com/journal/19383703" },
-    { title:"Behavior Analysis in Practice", desc:"Practitioner-focused research — more accessible and directly clinical",              url:"https://link.springer.com/journal/40617" },
+    { title:"Behavior Analysis in Practice",        desc:"Practitioner-focused research — more accessible and directly clinical",      url:"https://link.springer.com/journal/40617" },
   ]},
 ];
 
@@ -758,6 +758,279 @@ const AFFIRMATIONS=[
   "Before anything changes, something has to come first. You are that something.",
 ];
 
+// ─── SESSION NOTE BUILDER ────────────────────────────────────────────
+const SNB_GOALS=[
+  "Functional Communication Training (FCT)","Manding","Waiting / tolerance",
+  "Echoics / intraverbals","Social skills / peer interaction","Independent greeting",
+  "Item exchange / relinquishing","Imitation","Daily living skills","Play skills",
+];
+const SNB_DEFICITS=[
+  "Communication","Social interaction","Adaptive behavior",
+  "Behavior regulation","Play skills","Academic / pre-academic",
+];
+const SNB_REINFORCERS=[
+  "Tangibles (toys, objects)","Edibles","Social (praise, attention)",
+  "Activity-based","Token economy",
+];
+const SNB_STRATEGIES=[
+  "DTT","NET","Shaping","Chaining","Prompting / fading",
+  "Positive reinforcement","Redirection","FCT","Verbal praise","Modeling",
+];
+const SNB_BEHAVIORS=[
+  "Aggression","Self-injurious behavior (SIB)","Elopement",
+  "Property destruction","Non-compliance","Vocal disruption",
+];
+const SNB_PROCEDURES=[
+  "Differential reinforcement","Extinction","Response interruption / redirection",
+  "Planned ignoring","Antecedent modification","Crisis / safety procedure",
+];
+const SNB_RESPONSE=[
+  "Highly engaged and motivated throughout",
+  "Engaged with some prompting needed",
+  "Variable — strong start, difficult mid-session",
+  "Difficult session — required significant support",
+];
+
+function MultiSelect({options,selected,onToggle,color}){
+  return (
+    <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
+      {options.map(o=>{
+        const on=selected.includes(o);
+        return <button key={o} onClick={()=>onToggle(o)} style={{padding:"5px 11px",borderRadius:20,border:`1.5px solid ${on?color:C.sand}`,background:on?`${color}18`:C.linen,color:on?color:C.dusk,fontSize:"11px",fontWeight:600,cursor:"pointer",fontFamily:"'DM Sans',sans-serif",transition:"all 0.2s"}}>{o}</button>;
+      })}
+    </div>
+  );
+}
+
+function SessionNoteBuilder(){
+  const [open,setOpen]=useState(false);
+  const [step,setStep]=useState(1);
+  const [loading,setLoading]=useState(false);
+  const [result,setResult]=useState(null);
+  const [copied,setCopied]=useState(null);
+  const [form,setForm]=useState({
+    clientCode:"",sessionLength:"",
+    goals:[],customGoal:"",
+    deficits:[],
+    reinforcers:[],customReinforcer:"",
+    strategies:[],customStrategy:"",
+    behaviors:[],noBehaviors:false,
+    procedures:[],
+    clientResponse:"",customResponse:"",
+    timestamps:"",
+    notes:"",
+  });
+
+  const toggle=(field,val)=>setForm(p=>({...p,[field]:p[field].includes(val)?p[field].filter(x=>x!==val):[...p[field],val]}));
+
+  const buildPrompt=()=>`You are an expert ABA clinical documentation specialist. Write a professional session note for an ABA therapy session.
+
+IMPORTANT RULES:
+- Write in ONE cohesive paragraph
+- Use professional ABA terminology throughout
+- Do NOT use percentages or acronyms (spell everything out)
+- Do NOT use the client's real name — use "${form.clientCode||"the client"}" throughout
+- Cover all 4 required QA areas: (1) overall activities, (2) ABA goals addressed, (3) client response to treatment, (4) behavioral procedures used and any concerning behaviors
+- Write as if submitting to a top-tier quality assurance review, BACB standards, and insurance requirements
+- Do not begin with "The client" — vary your opening
+
+SESSION DATA:
+Client code: ${form.clientCode||"Client"}
+Session length: ${form.sessionLength||"not specified"}
+Goals addressed: ${[...form.goals,form.customGoal].filter(Boolean).join(", ")||"not specified"}
+Deficit areas: ${form.deficits.join(", ")||"not specified"}
+Reinforcers used: ${[...form.reinforcers,form.customReinforcer].filter(Boolean).join(", ")||"not specified"}
+Intervention strategies: ${[...form.strategies,form.customStrategy].filter(Boolean).join(", ")||"not specified"}
+Concerning behaviors: ${form.noBehaviors?"No concerning behaviors noted this session":form.behaviors.join(", ")||"none noted"}
+Behavior procedures used: ${form.procedures.join(", ")||"not specified"}
+Client response/engagement: ${form.customResponse||form.clientResponse||"not specified"}
+Time-stamped events: ${form.timestamps||"none noted"}
+Additional notes: ${form.notes||"none"}
+
+Write the DRAFT version first — clear and professional.
+Then write "---POLISHED---" on its own line.
+Then write the POLISHED version — same content, more refined and elevated language.`;
+
+  const generate=async()=>{
+    setLoading(true);
+    setResult(null);
+    try{
+      const res=await fetch("https://api.anthropic.com/v1/messages",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          model:"claude-sonnet-4-20250514",
+          max_tokens:1000,
+          messages:[{role:"user",content:buildPrompt()}],
+        }),
+      });
+      const data=await res.json();
+      const text=data.content?.[0]?.text||"";
+      const parts=text.split("---POLISHED---");
+      setResult({draft:(parts[0]||"").trim(),polished:(parts[1]||"").trim()});
+      setStep(4);
+    }catch(e){
+      setResult({draft:"Unable to generate note. Please check your connection and try again.",polished:""});
+      setStep(4);
+    }
+    setLoading(false);
+  };
+
+  const copyText=(text,which)=>{
+    navigator.clipboard.writeText(text).then(()=>{setCopied(which);setTimeout(()=>setCopied(null),2000);});
+  };
+
+  const reset=()=>{setStep(1);setResult(null);setForm({clientCode:"",sessionLength:"",goals:[],customGoal:"",deficits:[],reinforcers:[],customReinforcer:"",strategies:[],customStrategy:"",behaviors:[],noBehaviors:false,procedures:[],clientResponse:"",customResponse:"",timestamps:"",notes:""});};
+
+  if(!open) return (
+    <div style={{marginBottom:18}}>
+      <div style={ser("14px",C.bark,700,{marginBottom:4})}>Session Note Builder</div>
+      <div style={ss("11px",C.dusk,400,{marginBottom:10,lineHeight:1.6})}>AI-powered. QA-ready. HIPAA-safe.</div>
+      <button onClick={()=>setOpen(true)} style={{width:"100%",padding:"15px 0",borderRadius:16,background:`linear-gradient(135deg,${C.walnut},${C.espresso})`,border:"none",cursor:"pointer",color:C.white,fontFamily:"'Playfair Display',serif",fontSize:"15px",fontWeight:700,letterSpacing:"0.01em",boxShadow:`0 6px 20px ${C.walnut}44`}}>
+        Build a session note
+      </button>
+    </div>
+  );
+
+  return (
+    <div style={{background:C.white,borderRadius:18,overflow:"hidden",boxShadow:`0 2px 16px ${C.sand}`,marginBottom:18}}>
+      <div style={{background:`linear-gradient(135deg,${C.walnut},${C.espresso})`,padding:"16px 18px"}}>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+          <div style={ser("15px",C.white,700)}>Session Note Builder</div>
+          <button onClick={()=>{setOpen(false);reset();}} style={{background:"rgba(255,255,255,0.1)",border:"none",cursor:"pointer",borderRadius:8,padding:"4px 10px",fontSize:"11px",color:"rgba(255,255,255,0.7)",fontFamily:"'DM Sans',sans-serif"}}>Close</button>
+        </div>
+        <div style={{background:"rgba(255,255,255,0.08)",borderRadius:8,padding:"6px 10px",marginTop:10}}>
+          <div style={ss("10px","rgba(255,255,255,0.6)",500)}>⚠ Do not enter real names or identifying information. Use client codes only.</div>
+        </div>
+        {/* Progress */}
+        <div style={{display:"flex",gap:6,marginTop:12}}>
+          {[1,2,3].map(s=><div key={s} style={{flex:1,height:3,borderRadius:2,background:step>s?"rgba(255,255,255,0.8)":step===s?"rgba(255,255,255,0.5)":"rgba(255,255,255,0.15)",transition:"all 0.3s"}}/>)}
+        </div>
+        <div style={ss("9px","rgba(255,255,255,0.4)",500,{marginTop:4})}>
+          {step===1?"Step 1 of 3 — Session basics & goals":step===2?"Step 2 of 3 — Reinforcers & strategies":step===3?"Step 3 of 3 — Behaviors & client response":"Generating..."}
+        </div>
+      </div>
+
+      <div style={{padding:"18px 16px"}}>
+        {/* STEP 1 */}
+        {step===1&&(
+          <div>
+            <div style={ss("11px",C.bark,600,{marginBottom:5})}>Client code <span style={{color:C.stone,fontWeight:400}}>(no real names)</span></div>
+            <input value={form.clientCode} onChange={e=>setForm(p=>({...p,clientCode:e.target.value}))} placeholder="e.g. Client A, J.M., Blue" style={{width:"100%",padding:"10px 12px",borderRadius:10,border:`1.5px solid ${C.sand}`,fontSize:"13px",fontFamily:"'DM Sans',sans-serif",outline:"none",boxSizing:"border-box",marginBottom:14,color:C.bark}}/>
+
+            <div style={ss("11px",C.bark,600,{marginBottom:5})}>Session length</div>
+            <input value={form.sessionLength} onChange={e=>setForm(p=>({...p,sessionLength:e.target.value}))} placeholder="e.g. 2 hours, 90 minutes" style={{width:"100%",padding:"10px 12px",borderRadius:10,border:`1.5px solid ${C.sand}`,fontSize:"13px",fontFamily:"'DM Sans',sans-serif",outline:"none",boxSizing:"border-box",marginBottom:14,color:C.bark}}/>
+
+            <div style={ss("11px",C.bark,600,{marginBottom:8})}>Goals addressed</div>
+            <MultiSelect options={SNB_GOALS} selected={form.goals} onToggle={v=>toggle("goals",v)} color={C.walnut}/>
+            <input value={form.customGoal} onChange={e=>setForm(p=>({...p,customGoal:e.target.value}))} placeholder="+ Add custom goal" style={{width:"100%",padding:"8px 12px",borderRadius:10,border:`1.5px solid ${C.sand}`,fontSize:"12px",fontFamily:"'DM Sans',sans-serif",outline:"none",boxSizing:"border-box",marginTop:8,marginBottom:14,color:C.bark}}/>
+
+            <div style={ss("11px",C.bark,600,{marginBottom:8})}>Deficit areas addressed</div>
+            <MultiSelect options={SNB_DEFICITS} selected={form.deficits} onToggle={v=>toggle("deficits",v)} color={C.umber}/>
+
+            <button onClick={()=>setStep(2)} style={{width:"100%",padding:12,borderRadius:12,background:C.walnut,border:"none",cursor:"pointer",color:C.white,fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:"13px",marginTop:18}}>Next →</button>
+          </div>
+        )}
+
+        {/* STEP 2 */}
+        {step===2&&(
+          <div>
+            <div style={ss("11px",C.bark,600,{marginBottom:8})}>Reinforcers used</div>
+            <MultiSelect options={SNB_REINFORCERS} selected={form.reinforcers} onToggle={v=>toggle("reinforcers",v)} color={C.terra}/>
+            <input value={form.customReinforcer} onChange={e=>setForm(p=>({...p,customReinforcer:e.target.value}))} placeholder="+ Describe specific reinforcers (e.g. marble run, puzzles, donuts)" style={{width:"100%",padding:"8px 12px",borderRadius:10,border:`1.5px solid ${C.sand}`,fontSize:"12px",fontFamily:"'DM Sans',sans-serif",outline:"none",boxSizing:"border-box",marginTop:8,marginBottom:14,color:C.bark}}/>
+
+            <div style={ss("11px",C.bark,600,{marginBottom:8})}>Intervention strategies used</div>
+            <MultiSelect options={SNB_STRATEGIES} selected={form.strategies} onToggle={v=>toggle("strategies",v)} color={C.sage}/>
+            <input value={form.customStrategy} onChange={e=>setForm(p=>({...p,customStrategy:e.target.value}))} placeholder="+ Add custom strategy" style={{width:"100%",padding:"8px 12px",borderRadius:10,border:`1.5px solid ${C.sand}`,fontSize:"12px",fontFamily:"'DM Sans',sans-serif",outline:"none",boxSizing:"border-box",marginTop:8,marginBottom:14,color:C.bark}}/>
+
+            <div style={ss("11px",C.bark,600,{marginBottom:8})}>Time-stamped events</div>
+            <input value={form.timestamps} onChange={e=>setForm(p=>({...p,timestamps:e.target.value}))} placeholder="e.g. Potty break at 9:51am, snack at 10:30am" style={{width:"100%",padding:"10px 12px",borderRadius:10,border:`1.5px solid ${C.sand}`,fontSize:"13px",fontFamily:"'DM Sans',sans-serif",outline:"none",boxSizing:"border-box",marginBottom:14,color:C.bark}}/>
+
+            <div style={{display:"flex",gap:8,marginTop:4}}>
+              <button onClick={()=>setStep(1)} style={{flex:1,padding:12,borderRadius:12,background:C.linen,border:`1.5px solid ${C.sand}`,cursor:"pointer",color:C.umber,fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:"13px"}}>← Back</button>
+              <button onClick={()=>setStep(3)} style={{flex:2,padding:12,borderRadius:12,background:C.walnut,border:"none",cursor:"pointer",color:C.white,fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:"13px"}}>Next →</button>
+            </div>
+          </div>
+        )}
+
+        {/* STEP 3 */}
+        {step===3&&(
+          <div>
+            <div style={ss("11px",C.bark,600,{marginBottom:8})}>Concerning behaviors</div>
+            <MultiSelect options={SNB_BEHAVIORS} selected={form.behaviors} onToggle={v=>toggle("behaviors",v)} color={C.terra}/>
+            <button onClick={()=>setForm(p=>({...p,noBehaviors:!p.noBehaviors,behaviors:[]}))} style={{marginTop:8,marginBottom:14,padding:"5px 14px",borderRadius:20,border:`1.5px solid ${form.noBehaviors?C.sage:C.sand}`,background:form.noBehaviors?`${C.sage}18`:C.linen,color:form.noBehaviors?C.sage:C.dusk,fontSize:"11px",fontWeight:600,cursor:"pointer",fontFamily:"'DM Sans',sans-serif"}}>
+              No concerning behaviors this session
+            </button>
+
+            <div style={ss("11px",C.bark,600,{marginBottom:8})}>Behavior procedures used</div>
+            <MultiSelect options={SNB_PROCEDURES} selected={form.procedures} onToggle={v=>toggle("procedures",v)} color={C.umber}/>
+
+            <div style={ss("11px",C.bark,600,{marginBottom:8,marginTop:14})}>Client response to treatment</div>
+            <div style={{display:"flex",flexDirection:"column",gap:6,marginBottom:10}}>
+              {SNB_RESPONSE.map(r=>(
+                <button key={r} onClick={()=>setForm(p=>({...p,clientResponse:r,customResponse:""}))} style={{textAlign:"left",padding:"9px 12px",borderRadius:10,border:`1.5px solid ${form.clientResponse===r?C.walnut:C.sand}`,background:form.clientResponse===r?`${C.walnut}10`:C.linen,color:form.clientResponse===r?C.walnut:C.dusk,fontSize:"12px",fontWeight:500,cursor:"pointer",fontFamily:"'DM Sans',sans-serif",transition:"all 0.2s"}}>{r}</button>
+              ))}
+            </div>
+            <input value={form.customResponse} onChange={e=>setForm(p=>({...p,customResponse:e.target.value,clientResponse:""}))} placeholder="Or describe client response in your own words" style={{width:"100%",padding:"10px 12px",borderRadius:10,border:`1.5px solid ${C.sand}`,fontSize:"12px",fontFamily:"'DM Sans',sans-serif",outline:"none",boxSizing:"border-box",marginBottom:10,color:C.bark}}/>
+
+            <div style={ss("11px",C.bark,600,{marginBottom:5})}>Additional notes <span style={{color:C.stone,fontWeight:400}}>(optional)</span></div>
+            <textarea value={form.notes} onChange={e=>setForm(p=>({...p,notes:e.target.value}))} placeholder="Anything else to include — no identifying info" rows={3} style={{width:"100%",padding:"10px 12px",borderRadius:10,border:`1.5px solid ${C.sand}`,fontSize:"12px",fontFamily:"'DM Sans',sans-serif",outline:"none",boxSizing:"border-box",marginBottom:14,color:C.bark,resize:"none"}}/>
+
+            <div style={{display:"flex",gap:8}}>
+              <button onClick={()=>setStep(2)} style={{flex:1,padding:12,borderRadius:12,background:C.linen,border:`1.5px solid ${C.sand}`,cursor:"pointer",color:C.umber,fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:"13px"}}>← Back</button>
+              <button onClick={generate} disabled={loading} style={{flex:2,padding:12,borderRadius:12,background:loading?C.stone:C.terra,border:"none",cursor:loading?"not-allowed":"pointer",color:C.white,fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:"13px"}}>
+                {loading?"Generating...":"Generate note"}
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* STEP 4 — Results */}
+        {step===4&&result&&(
+          <div>
+            <div style={{background:`${C.sage}12`,borderRadius:12,padding:10,marginBottom:16,borderLeft:`3px solid ${C.sage}`}}>
+              <div style={ss("10px",C.sage,700,{marginBottom:2})}>Review before submitting</div>
+              <div style={ss("10px",C.umber,400,{lineHeight:1.6})}>Always verify accuracy. You are responsible for the content of your documentation.</div>
+            </div>
+
+            {result.draft&&(
+              <div style={{marginBottom:14}}>
+                <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}>
+                  <div style={ss("11px",C.bark,700,{textTransform:"uppercase",letterSpacing:"0.08em"})}>Draft</div>
+                  <button onClick={()=>copyText(result.draft,"draft")} style={{padding:"4px 12px",borderRadius:8,background:copied==="draft"?C.sage:C.linen,border:`1px solid ${copied==="draft"?C.sage:C.sand}`,cursor:"pointer",fontSize:"11px",fontWeight:700,color:copied==="draft"?C.white:C.umber,fontFamily:"'DM Sans',sans-serif",transition:"all 0.2s"}}>
+                    {copied==="draft"?"Copied!":"Copy"}
+                  </button>
+                </div>
+                <div style={{background:C.linen,borderRadius:12,padding:14,border:`1px solid ${C.sand}`}}>
+                  <p style={ss("12px",C.umber,400,{margin:0,lineHeight:1.9})}>{result.draft}</p>
+                </div>
+              </div>
+            )}
+
+            {result.polished&&(
+              <div style={{marginBottom:14}}>
+                <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}>
+                  <div style={ss("11px",C.bark,700,{textTransform:"uppercase",letterSpacing:"0.08em"})}>Polished</div>
+                  <button onClick={()=>copyText(result.polished,"polished")} style={{padding:"4px 12px",borderRadius:8,background:copied==="polished"?C.sage:C.linen,border:`1px solid ${copied==="polished"?C.sage:C.sand}`,cursor:"pointer",fontSize:"11px",fontWeight:700,color:copied==="polished"?C.white:C.umber,fontFamily:"'DM Sans',sans-serif",transition:"all 0.2s"}}>
+                    {copied==="polished"?"Copied!":"Copy"}
+                  </button>
+                </div>
+                <div style={{background:`${C.walnut}08`,borderRadius:12,padding:14,border:`1px solid ${C.walnut}22`}}>
+                  <p style={ital("12px",C.bark,400,{margin:0,lineHeight:1.9})}>{result.polished}</p>
+                </div>
+              </div>
+            )}
+
+            <button onClick={reset} style={{width:"100%",padding:12,borderRadius:12,background:C.linen,border:`1.5px solid ${C.sand}`,cursor:"pointer",color:C.umber,fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:"13px",marginTop:4}}>
+              Build another note
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 // ─── HOME TAB ────────────────────────────────────────────────────────
 function HomeTab({profile,points,addPoints,setPopup,saved,setSaved,setTab,onMilestone}){
   const [mood,setMood]=useState(null);
@@ -777,7 +1050,7 @@ function HomeTab({profile,points,addPoints,setPopup,saved,setSaved,setTab,onMile
 
   const dayOfMonth=new Date().getDate();
   const innerWorkMsg=DAILY_NOTES[(dayOfMonth-1)%DAILY_NOTES.length];
-  const recentNotes=Array.from({length:Math.min(7,dayOfMonth-1)},(_,i)=>{
+  const recentNotes=Array.from({length:dayOfMonth-1},(_,i)=>{
     const d=dayOfMonth-1-i;
     return {...DAILY_NOTES[(d-1)%DAILY_NOTES.length],dayNum:d};
   });
@@ -914,6 +1187,9 @@ function HomeTab({profile,points,addPoints,setPopup,saved,setSaved,setTab,onMile
           )}
         </div>
       </div>
+
+      {/* Session Note Builder */}
+      <SessionNoteBuilder/>
 
       {/* Mission */}
       <div style={{marginTop:18,background:`linear-gradient(135deg,${C.espresso},${C.walnut})`,borderRadius:16,padding:18}}>
