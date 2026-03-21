@@ -401,8 +401,8 @@ const DAILY_NOTES = [
 const RESOURCES = [
   { category:"Official BACB Resources", color:C.walnut, items:[
     { title:"BACB Website",                        desc:"Certification requirements, ethics code, task lists, continuing education", url:"https://www.bacb.com" },
-    { title:"Ethics Code — All Credentials",        desc:"RBT, BCaBA, and BCBA ethics codes — read it, know it, live it",           url:"https://www.bacb.com/rbt/?topic=rbt-ethics#rbtResourceCarousel" },
-    { title:"RBT Test Content Outline (3rd Ed)",    desc:"The official RBT exam content outline — effective January 1, 2026",        url:"https://www.bacb.com/test-content-outlines-for-bacb-certifications/" },
+    { title:"Ethics Code — All Credentials",        desc:"RBT, BCaBA, and BCBA ethics codes — read it, know it, live it",           url:"https://www.bacb.com/ethics-information/ethics-codes/" },
+    { title:"RBT Test Content Outline (3rd Ed)",    desc:"The official RBT exam content outline — effective January 1, 2026",        url:"https://www.bacb.com/wp-content/uploads/2023/12/RBT-3rd-Edition-Test-Content-Outline-240903-a.pdf" },
     { title:"BCaBA Test Content Outline (6th Ed)",  desc:"All 90 tasks across 9 domains — the official BCaBA exam blueprint",        url:"https://www.bacb.com/wp-content/bcaba-outline-6thEd/" },
     { title:"BCBA Test Content Outline (6th Ed)",   desc:"All 104 tasks across 9 domains — the official BCBA exam blueprint",        url:"https://www.bacb.com/wp-content/uploads/2022/01/BCBA-6th-Edition-Test-Content-Outline-240903-a.pdf" },
     { title:"BACB Newsletters",                     desc:"Stay current on policy updates, research, and field news",                  url:"https://www.bacb.com/newsletters/" },
@@ -410,8 +410,6 @@ const RESOURCES = [
   { category:"Essential Books", color:C.umber, items:[
     { title:"Applied Behavior Analysis — Cooper, Heron & Heward", desc:"The gold standard textbook. If you own one ABA book, this is it.", url:"https://www.amazon.com/Applied-Behavior-Analysis-John-Cooper/dp/0134752554" },
     { title:"Ethics for Behavior Analysts — Bailey & Burch",       desc:"The most practical ethics guide for everyday ABA practice — 4th edition", url:"https://www.amazon.com/Ethics-Behavior-Analysts-Jon-Bailey/dp/1032056428" },
-    { title:"Verbal Behavior — B.F. Skinner",                      desc:"The foundational text for understanding language through behavioral analysis", url:"https://www.amazon.com/Verbal-Behavior-B-F-Skinner/dp/1614278121" },
-    { title:"Behavior Modification — Miltenberger",                 desc:"Accessible and comprehensive — widely used in BCBA coursework",             url:"https://www.amazon.com/Behavior-Modification-Principles-Procedures-Miltenberger/dp/1305109430" },
   ]},
   { category:"YouTube Channels", color:C.terra, items:[
     { title:"Dr. Mary Barbera — Turn Autism Around", desc:"Verbal behavior, parent training, and practical ABA content",                             url:"https://www.youtube.com/@marybarbera" },
@@ -421,7 +419,7 @@ const RESOURCES = [
   ]},
   { category:"Career & Professional Growth", color:C.sage, items:[
     { title:"BACB Supervision Requirements",        desc:"Step-by-step guide to supervision hours and finding a qualified supervisor", url:"https://www.bacb.com/supervision/" },
-    { title:"CEU Requirements & Providers",         desc:"Everything you need to know about maintaining your certification",           url:"https://www.bacb.com/continuing-education/" },
+    { title:"CE / ACE Providers",                   desc:"Find authorized continuing education providers to maintain your certification", url:"https://www.bacb.com/authorized-continuing-education-providers/" },
     { title:"Journal of Applied Behavior Analysis", desc:"The premier peer-reviewed journal in ABA — free access to many articles",   url:"https://onlinelibrary.wiley.com/journal/19383703" },
     { title:"Behavior Analysis in Practice",        desc:"Practitioner-focused research — more accessible and directly clinical",      url:"https://link.springer.com/journal/40617" },
   ]},
@@ -764,9 +762,11 @@ const SNB_GOALS=[
   "Echoics / intraverbals","Social skills / peer interaction","Independent greeting",
   "Item exchange / relinquishing","Imitation","Daily living skills","Play skills",
 ];
-const SNB_DEFICITS=[
-  "Communication","Social interaction","Adaptive behavior",
-  "Behavior regulation","Play skills","Academic / pre-academic",
+const SNB_SKILL_AREAS=[
+  "Communication / language","Social skills / joint attention","Cognitive skills",
+  "School readiness / academic skills","Activities of daily living (ADL)",
+  "Visual perception / motor imitation","Play skills / leisure skills",
+  "Self-help / independence","Emotional regulation","Prevocational / vocational skills",
 ];
 const SNB_REINFORCERS=[
   "Tangibles (toys, objects)","Edibles","Social (praise, attention)",
@@ -775,14 +775,22 @@ const SNB_REINFORCERS=[
 const SNB_STRATEGIES=[
   "DTT","NET","Shaping","Chaining","Prompting / fading",
   "Positive reinforcement","Redirection","FCT","Verbal praise","Modeling",
+  "Joint attention training","Planned ignoring","Visual supports / schedules",
+  "Social stories","Peer-mediated intervention","Video modeling",
+  "Errorless teaching","Incidental teaching","Pivotal Response Training (PRT)",
+  "Pairing / rapport building",
 ];
 const SNB_BEHAVIORS=[
-  "Aggression","Self-injurious behavior (SIB)","Elopement",
-  "Property destruction","Non-compliance","Vocal disruption",
+  "Aggression (hitting, kicking, biting, scratching)","Self-injurious behavior (SIB)",
+  "Elopement / running","Property destruction","Non-compliance / refusal",
+  "Tantrum / emotional outburst","Vocal disruption / screaming",
+  "Stereotypy / repetitive behavior","Pica",
 ];
-const SNB_PROCEDURES=[
-  "Differential reinforcement","Extinction","Response interruption / redirection",
-  "Planned ignoring","Antecedent modification","Crisis / safety procedure",
+const SNB_MALADAPTIVE_RESPONSE=[
+  "Behaviors were managed successfully with planned procedures",
+  "Behaviors required redirection — session continued effectively",
+  "Behaviors significantly impacted session — BCBA notified",
+  "No maladaptive behaviors observed this session",
 ];
 const SNB_RESPONSE=[
   "Highly engaged and motivated throughout",
@@ -811,11 +819,10 @@ function SessionNoteBuilder(){
   const [form,setForm]=useState({
     clientCode:"",sessionLength:"",
     goals:[],customGoal:"",
-    deficits:[],
+    skillAreas:[],
     reinforcers:[],customReinforcer:"",
     strategies:[],customStrategy:"",
-    behaviors:[],noBehaviors:false,
-    procedures:[],
+    behaviors:[],maladaptiveResponse:"",
     clientResponse:"",customResponse:"",
     timestamps:"",
     notes:"",
@@ -830,7 +837,7 @@ IMPORTANT RULES:
 - Use professional ABA terminology throughout
 - Do NOT use percentages or acronyms (spell everything out)
 - Do NOT use the client's real name — use "${form.clientCode||"the client"}" throughout
-- Cover all 4 required QA areas: (1) overall activities, (2) ABA goals addressed, (3) client response to treatment, (4) behavioral procedures used and any concerning behaviors
+- Cover all 4 required QA areas: (1) overall activities completed, (2) ABA goals and skill areas addressed, (3) client's level of involvement and response to treatment, (4) behavioral procedures used and any maladaptive behaviors observed
 - Write as if submitting to a top-tier quality assurance review, BACB standards, and insurance requirements
 - Do not begin with "The client" — vary your opening
 
@@ -838,11 +845,11 @@ SESSION DATA:
 Client code: ${form.clientCode||"Client"}
 Session length: ${form.sessionLength||"not specified"}
 Goals addressed: ${[...form.goals,form.customGoal].filter(Boolean).join(", ")||"not specified"}
-Deficit areas: ${form.deficits.join(", ")||"not specified"}
+Skill areas targeted: ${form.skillAreas.join(", ")||"not specified"}
 Reinforcers used: ${[...form.reinforcers,form.customReinforcer].filter(Boolean).join(", ")||"not specified"}
-Intervention strategies: ${[...form.strategies,form.customStrategy].filter(Boolean).join(", ")||"not specified"}
-Concerning behaviors: ${form.noBehaviors?"No concerning behaviors noted this session":form.behaviors.join(", ")||"none noted"}
-Behavior procedures used: ${form.procedures.join(", ")||"not specified"}
+Intervention strategies used: ${[...form.strategies,form.customStrategy].filter(Boolean).join(", ")||"not specified"}
+Maladaptive behaviors observed: ${form.behaviors.length===0?"No maladaptive behaviors observed this session":form.behaviors.join(", ")}
+Maladaptive behavior outcome: ${form.maladaptiveResponse||"not specified"}
 Client response/engagement: ${form.customResponse||form.clientResponse||"not specified"}
 Time-stamped events: ${form.timestamps||"none noted"}
 Additional notes: ${form.notes||"none"}
@@ -857,7 +864,10 @@ Then write the POLISHED version — same content, more refined and elevated lang
     try{
       const res=await fetch("https://api.anthropic.com/v1/messages",{
         method:"POST",
-        headers:{"Content-Type":"application/json"},
+        headers:{
+          "Content-Type":"application/json",
+          "anthropic-dangerous-direct-browser-access":"true",
+        },
         body:JSON.stringify({
           model:"claude-sonnet-4-20250514",
           max_tokens:1000,
@@ -880,7 +890,7 @@ Then write the POLISHED version — same content, more refined and elevated lang
     navigator.clipboard.writeText(text).then(()=>{setCopied(which);setTimeout(()=>setCopied(null),2000);});
   };
 
-  const reset=()=>{setStep(1);setResult(null);setForm({clientCode:"",sessionLength:"",goals:[],customGoal:"",deficits:[],reinforcers:[],customReinforcer:"",strategies:[],customStrategy:"",behaviors:[],noBehaviors:false,procedures:[],clientResponse:"",customResponse:"",timestamps:"",notes:""});};
+  const reset=()=>{setStep(1);setResult(null);setForm({clientCode:"",sessionLength:"",goals:[],customGoal:"",skillAreas:[],reinforcers:[],customReinforcer:"",strategies:[],customStrategy:"",behaviors:[],maladaptiveResponse:"",clientResponse:"",customResponse:"",timestamps:"",notes:""});};
 
   if(!open) return (
     <div style={{marginBottom:18}}>
@@ -925,8 +935,8 @@ Then write the POLISHED version — same content, more refined and elevated lang
             <MultiSelect options={SNB_GOALS} selected={form.goals} onToggle={v=>toggle("goals",v)} color={C.walnut}/>
             <input value={form.customGoal} onChange={e=>setForm(p=>({...p,customGoal:e.target.value}))} placeholder="+ Add custom goal" style={{width:"100%",padding:"8px 12px",borderRadius:10,border:`1.5px solid ${C.sand}`,fontSize:"12px",fontFamily:"'DM Sans',sans-serif",outline:"none",boxSizing:"border-box",marginTop:8,marginBottom:14,color:C.bark}}/>
 
-            <div style={ss("11px",C.bark,600,{marginBottom:8})}>Deficit areas addressed</div>
-            <MultiSelect options={SNB_DEFICITS} selected={form.deficits} onToggle={v=>toggle("deficits",v)} color={C.umber}/>
+            <div style={ss("11px",C.bark,600,{marginBottom:8})}>Skill areas targeted</div>
+            <MultiSelect options={SNB_SKILL_AREAS} selected={form.skillAreas} onToggle={v=>toggle("skillAreas",v)} color={C.umber}/>
 
             <button onClick={()=>setStep(2)} style={{width:"100%",padding:12,borderRadius:12,background:C.walnut,border:"none",cursor:"pointer",color:C.white,fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:"13px",marginTop:18}}>Next →</button>
           </div>
@@ -956,14 +966,15 @@ Then write the POLISHED version — same content, more refined and elevated lang
         {/* STEP 3 */}
         {step===3&&(
           <div>
-            <div style={ss("11px",C.bark,600,{marginBottom:8})}>Concerning behaviors</div>
+            <div style={ss("11px",C.bark,600,{marginBottom:8})}>Maladaptive behaviors observed</div>
             <MultiSelect options={SNB_BEHAVIORS} selected={form.behaviors} onToggle={v=>toggle("behaviors",v)} color={C.terra}/>
-            <button onClick={()=>setForm(p=>({...p,noBehaviors:!p.noBehaviors,behaviors:[]}))} style={{marginTop:8,marginBottom:14,padding:"5px 14px",borderRadius:20,border:`1.5px solid ${form.noBehaviors?C.sage:C.sand}`,background:form.noBehaviors?`${C.sage}18`:C.linen,color:form.noBehaviors?C.sage:C.dusk,fontSize:"11px",fontWeight:600,cursor:"pointer",fontFamily:"'DM Sans',sans-serif"}}>
-              No concerning behaviors this session
-            </button>
 
-            <div style={ss("11px",C.bark,600,{marginBottom:8})}>Behavior procedures used</div>
-            <MultiSelect options={SNB_PROCEDURES} selected={form.procedures} onToggle={v=>toggle("procedures",v)} color={C.umber}/>
+            <div style={ss("11px",C.bark,600,{marginBottom:8,marginTop:14})}>How were maladaptive behaviors managed?</div>
+            <div style={{display:"flex",flexDirection:"column",gap:6,marginBottom:14}}>
+              {SNB_MALADAPTIVE_RESPONSE.map(r=>(
+                <button key={r} onClick={()=>setForm(p=>({...p,maladaptiveResponse:r}))} style={{textAlign:"left",padding:"9px 12px",borderRadius:10,border:`1.5px solid ${form.maladaptiveResponse===r?C.terra:C.sand}`,background:form.maladaptiveResponse===r?`${C.terra}10`:C.linen,color:form.maladaptiveResponse===r?C.terra:C.dusk,fontSize:"12px",fontWeight:500,cursor:"pointer",fontFamily:"'DM Sans',sans-serif",transition:"all 0.2s"}}>{r}</button>
+              ))}
+            </div>
 
             <div style={ss("11px",C.bark,600,{marginBottom:8,marginTop:14})}>Client response to treatment</div>
             <div style={{display:"flex",flexDirection:"column",gap:6,marginBottom:10}}>
