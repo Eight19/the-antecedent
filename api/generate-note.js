@@ -1,5 +1,12 @@
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: "1mb",
+    },
+  },
+};
+
 export default async function handler(req, res) {
-  // Handle CORS
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -8,11 +15,22 @@ export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
   try {
-    const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
-    const prompt = body?.prompt;
+    // Parse body — handle both string and object
+    let prompt;
+    if (typeof req.body === "string") {
+      const parsed = JSON.parse(req.body);
+      prompt = parsed.prompt;
+    } else if (req.body && typeof req.body === "object") {
+      prompt = req.body.prompt;
+    }
 
     if (!prompt) {
-      return res.status(400).json({ error: "Prompt is required", received: JSON.stringify(body) });
+      return res.status(400).json({
+        error: "Prompt missing",
+        bodyType: typeof req.body,
+        bodyKeys: req.body ? Object.keys(req.body) : [],
+        bodyPreview: JSON.stringify(req.body)?.slice(0, 200),
+      });
     }
 
     const response = await fetch("https://api.anthropic.com/v1/messages", {
@@ -40,3 +58,4 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: "Server error", details: error.message });
   }
 }
+
