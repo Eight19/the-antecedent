@@ -58,7 +58,28 @@ const BADGES = [
   { id:"luminary",    icon:"*", name:"Luminary",         desc:"Earned 750+ points",       pts:750 },
 ];
 
-// ─── MESSAGE LIBRARY ─────────────────────────────────────────────────
+// ─── DAILY ACTIONS TRACKING ──────────────────────────────────────────
+const DAILY_ACTIONS = {
+  checkIn:       { label:"Mood check-in",                      icon:"○" },
+  readMessage:   { label:"Send me a kindness note",            icon:"○" },
+  saveMessage:   { label:"Save a note",                        icon:"○" },
+  readInnerWork: { label:"Read The Inner Work note",           icon:"○" },
+  completeTask:  { label:"Complete a study task",              icon:"○" },
+  openMessage:   { label:"Open a message library card",        icon:"○" },
+  submitFeedback:{ label:"Share your feedback",                icon:"○" },
+};
+const NOTES_PER_DAY = 4;
+const ACTIONS_TO_UNLOCK = 3;
+
+function getTodayKey(){ return new Date().toDateString(); }
+function getDailyData(){
+  const stored=LS.get("ta_daily",{});
+  if(stored.date!==getTodayKey()) return {date:getTodayKey(),actions:[],notesUsed:0};
+  return stored;
+}
+function saveDailyData(data){ LS.set("ta_daily",data); }
+
+
 // Perspectives removed from display — content speaks for itself
 const MESSAGES = [
   { id:1,  cat:"encouragement", color:C.sage,
@@ -810,7 +831,13 @@ function MultiSelect({options,selected,onToggle,color}){
   );
 }
 
-function SessionNoteBuilder(){
+function SessionNoteBuilder({dailyData,trackAction,useNoteCredit}){
+  const actions=dailyData?.actions||[];
+  const notesUsed=dailyData?.notesUsed||0;
+  const unlockedCount=Object.keys(DAILY_ACTIONS).filter(k=>actions.includes(k)).length;
+  const isUnlocked=unlockedCount>=ACTIONS_TO_UNLOCK;
+  const notesRemaining=NOTES_PER_DAY-notesUsed;
+  const isDepleted=notesUsed>=NOTES_PER_DAY;
   const [open,setOpen]=useState(false);
   const [step,setStep]=useState(1);
   const [loading,setLoading]=useState(false);
@@ -871,6 +898,7 @@ Then write the POLISHED version — same content, more refined and elevated lang
       const text=data.content?.[0]?.text||"";
       const parts=text.split("---POLISHED---");
       setResult({draft:(parts[0]||"").trim(),polished:(parts[1]||"").trim()});
+      if(useNoteCredit) useNoteCredit();
       setStep(4);
     }catch(e){
       setResult({draft:"Unable to generate note. Please check your connection and try again.",polished:""});
@@ -887,11 +915,46 @@ Then write the POLISHED version — same content, more refined and elevated lang
 
   if(!open) return (
     <div style={{marginBottom:18}}>
-      <div style={ser("14px",C.bark,700,{marginBottom:4})}>Session Note Builder</div>
-      <div style={ss("11px",C.dusk,400,{marginBottom:10,lineHeight:1.6})}>AI-powered. QA-ready. HIPAA-safe.</div>
-      <button onClick={()=>setOpen(true)} style={{width:"100%",padding:"15px 0",borderRadius:16,background:`linear-gradient(135deg,${C.walnut},${C.espresso})`,border:"none",cursor:"pointer",color:C.white,fontFamily:"'Playfair Display',serif",fontSize:"15px",fontWeight:700,letterSpacing:"0.01em",boxShadow:`0 6px 20px ${C.walnut}44`}}>
-        Build a session note
-      </button>
+      <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",marginBottom:4}}>
+        <div style={ser("14px",C.bark,700)}>Session Note Builder</div>
+        {isUnlocked&&!isDepleted&&<div style={ss("10px",C.sage,600)}>{notesRemaining} note{notesRemaining!==1?"s":""} left today</div>}
+      </div>
+
+      {/* Lock status */}
+      {!isUnlocked&&(
+        <div style={{background:C.white,borderRadius:16,padding:16,marginBottom:10,boxShadow:`0 1px 8px ${C.sand}`,border:`1.5px solid ${C.sand}`}}>
+          <div style={ss("12px",C.bark,600,{marginBottom:6})}>
+            {unlockedCount} of {ACTIONS_TO_UNLOCK} actions completed today
+          </div>
+          <div style={{height:6,background:C.sand,borderRadius:3,overflow:"hidden",marginBottom:12}}>
+            <div style={{height:"100%",width:`${(unlockedCount/ACTIONS_TO_UNLOCK)*100}%`,background:C.terra,borderRadius:3,transition:"width 0.4s ease"}}/>
+          </div>
+          <div style={ital("11px",C.dusk,400,{marginBottom:12,lineHeight:1.6})}>
+            The Session Note Builder unlocks when you've shown up in {ACTIONS_TO_UNLOCK} ways today. Here's what's still available:
+          </div>
+          <div style={{display:"flex",flexDirection:"column",gap:6}}>
+            {Object.entries(DAILY_ACTIONS).filter(([k])=>!actions.includes(k)).map(([k,v])=>(
+              <div key={k} style={{display:"flex",alignItems:"center",gap:8,padding:"7px 10px",borderRadius:10,background:C.linen,border:`1px solid ${C.sand}`}}>
+                <div style={{width:7,height:7,borderRadius:"50%",background:C.terra,flexShrink:0}}/>
+                <div style={ss("12px",C.umber,500)}>{v.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {isDepleted&&(
+        <div style={{background:`${C.sage}12`,borderRadius:14,padding:14,marginBottom:10,border:`1.5px solid ${C.sage}33`,textAlign:"center"}}>
+          <div style={ser("14px",C.sage,700,{marginBottom:4})}>4 notes built today.</div>
+          <div style={ss("12px",C.umber,400,{lineHeight:1.6})}>You have done good work. Come back tomorrow for 4 more.</div>
+        </div>
+      )}
+
+      {!isDepleted&&(
+        <button onClick={()=>{if(isUnlocked)setOpen(true);}} disabled={!isUnlocked} style={{width:"100%",padding:"15px 0",borderRadius:16,background:isUnlocked?`linear-gradient(135deg,${C.walnut},${C.espresso})`:`${C.stone}44`,border:"none",cursor:isUnlocked?"pointer":"not-allowed",color:C.white,fontFamily:"'Playfair Display',serif",fontSize:"15px",fontWeight:700,letterSpacing:"0.01em",boxShadow:isUnlocked?`0 6px 20px ${C.walnut}44`:"none",transition:"all 0.3s"}}>
+          {isUnlocked?"Build a session note":`Locked — ${ACTIONS_TO_UNLOCK-unlockedCount} more action${ACTIONS_TO_UNLOCK-unlockedCount!==1?"s":""} needed`}
+        </button>
+      )}
     </div>
   );
 
@@ -1036,7 +1099,7 @@ Then write the POLISHED version — same content, more refined and elevated lang
 }
 
 // ─── HOME TAB ────────────────────────────────────────────────────────
-function HomeTab({profile,points,addPoints,setPopup,saved,setSaved,setTab,onMilestone}){
+function HomeTab({profile,points,addPoints,setPopup,saved,setSaved,setTab,onMilestone,dailyData,trackAction,useNoteCredit}){
   const [mood,setMood]=useState(null);
   const [affIdx,setAffIdx]=useState(0);
   const [lookbackNote,setLookbackNote]=useState(null);
@@ -1050,6 +1113,7 @@ function HomeTab({profile,points,addPoints,setPopup,saved,setSaved,setTab,onMile
     const msg=poolRef.current.splice(idx,1)[0];
     setPopup(msg);
     addPoints("readMessage");
+    trackAction("readMessage");
   };
 
   const dayOfMonth=new Date().getDate();
@@ -1100,7 +1164,7 @@ function HomeTab({profile,points,addPoints,setPopup,saved,setSaved,setTab,onMile
         <div style={ser("15px",C.bark,700,{marginBottom:12})}>How are you arriving today?</div>
         <div style={{display:"flex",gap:7,flexWrap:"wrap"}}>
           {MOODS.map(m=>(
-            <button key={m.label} onClick={()=>{setMood(m);addPoints("checkIn");}} style={{padding:"6px 12px",borderRadius:20,border:`1.5px solid ${mood?.label===m.label?m.color:C.sand}`,background:mood?.label===m.label?`${m.color}15`:C.linen,cursor:"pointer",fontSize:"11px",fontWeight:600,color:mood?.label===m.label?m.color:C.dusk,fontFamily:"'DM Sans',sans-serif",transition:"all 0.2s"}}>
+            <button key={m.label} onClick={()=>{setMood(m);addPoints("checkIn");trackAction("checkIn");}} style={{padding:"6px 12px",borderRadius:20,border:`1.5px solid ${mood?.label===m.label?m.color:C.sand}`,background:mood?.label===m.label?`${m.color}15`:C.linen,cursor:"pointer",fontSize:"11px",fontWeight:600,color:mood?.label===m.label?m.color:C.dusk,fontFamily:"'DM Sans',sans-serif",transition:"all 0.2s"}}>
               {m.label}
             </button>
           ))}
@@ -1142,8 +1206,11 @@ function HomeTab({profile,points,addPoints,setPopup,saved,setSaved,setTab,onMile
         <div style={{padding:20}}>
           <div style={ser("17px",C.bark,700,{marginBottom:14,lineHeight:1.35})}>{innerWorkMsg.title}</div>
           <p style={ss("13px",C.umber,400,{margin:"0 0 14px",lineHeight:1.9})}>{innerWorkMsg.body}</p>
-          <div style={{display:"flex",justifyContent:"flex-end"}}>
-            <button onClick={()=>{const ns=new Set(saved);ns.has(innerWorkMsg.id)?ns.delete(innerWorkMsg.id):ns.add(innerWorkMsg.id);setSaved(ns);if(!saved.has(innerWorkMsg.id))addPoints("saveMessage");}} style={{background:"none",border:"none",cursor:"pointer",fontSize:"16px",color:saved.has(innerWorkMsg.id)?C.copper:C.stone}}>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+            <button onClick={()=>{trackAction("readInnerWork");addPoints("readMessage");}} style={{padding:"7px 16px",borderRadius:10,background:dailyData.actions.includes("readInnerWork")?`${C.walnut}15`:C.linen,border:`1.5px solid ${dailyData.actions.includes("readInnerWork")?C.walnut:C.sand}`,cursor:"pointer",fontFamily:"'DM Sans',sans-serif",fontWeight:600,fontSize:"11px",color:dailyData.actions.includes("readInnerWork")?C.walnut:C.dusk,transition:"all 0.2s"}}>
+              {dailyData.actions.includes("readInnerWork")?"✓ Read":"Mark as read"}
+            </button>
+            <button onClick={()=>{const ns=new Set(saved);ns.has(innerWorkMsg.id)?ns.delete(innerWorkMsg.id):ns.add(innerWorkMsg.id);setSaved(ns);if(!saved.has(innerWorkMsg.id)){addPoints("saveMessage");trackAction("saveMessage");}}} style={{background:"none",border:"none",cursor:"pointer",fontSize:"16px",color:saved.has(innerWorkMsg.id)?C.copper:C.stone}}>
               {saved.has(innerWorkMsg.id)?"♥":"♡"}
             </button>
           </div>
@@ -1193,7 +1260,20 @@ function HomeTab({profile,points,addPoints,setPopup,saved,setSaved,setTab,onMile
       </div>
 
       {/* Session Note Builder */}
-      <SessionNoteBuilder/>
+      <SessionNoteBuilder dailyData={dailyData} trackAction={trackAction} useNoteCredit={useNoteCredit}/>
+
+      {/* Feedback */}
+      <a href="https://forms.gle/GSXzH6eTPrVcoybi7" target="_blank" rel="noopener noreferrer" onClick={()=>trackAction("submitFeedback")} style={{display:"block",marginBottom:14,textDecoration:"none"}}>
+        <div style={{background:C.white,borderRadius:16,padding:"14px 18px",boxShadow:`0 1px 8px ${C.sand}`,border:`1.5px solid ${C.sand}`,display:"flex",justifyContent:"space-between",alignItems:"center",transition:"all 0.2s"}}
+          onMouseEnter={e=>e.currentTarget.style.borderColor=C.terra}
+          onMouseLeave={e=>e.currentTarget.style.borderColor=C.sand}>
+          <div>
+            <div style={ss("13px",C.bark,700,{marginBottom:2})}>Was The Antecedent helpful today?</div>
+            <div style={ss("11px",C.dusk,400)}>Share your feedback — it takes 30 seconds.</div>
+          </div>
+          <div style={{fontSize:"20px",marginLeft:12}}>❤️</div>
+        </div>
+      </a>
 
       {/* Mission */}
       <div style={{marginTop:18,background:`linear-gradient(135deg,${C.espresso},${C.walnut})`,borderRadius:16,padding:18}}>
@@ -1210,7 +1290,7 @@ function HomeTab({profile,points,addPoints,setPopup,saved,setSaved,setTab,onMile
 }
 
 // ─── SHARED CREDENTIAL STUDY MODULE (BCaBA + BCBA) ──────────────────
-function CredentialStudyModule({label,edition,domains,accent,onBack,done,markDone,addPoints}){
+function CredentialStudyModule({label,edition,domains,accent,onBack,done,markDone,addPoints,trackAction}){
   const [domain,setDomain]=useState(null);
   const [taskIdx,setTaskIdx]=useState(0);
   const [tab,setTab]=useState("learn");
@@ -1327,7 +1407,7 @@ function CredentialStudyModule({label,edition,domains,accent,onBack,done,markDon
                 <div style={ss("9px",dom.color,700,{textTransform:"uppercase",letterSpacing:"0.08em",marginBottom:3})}>Pro tip:</div>
                 <p style={ss("12px",C.umber,400,{margin:0,lineHeight:1.65})}>{task.tip}</p>
               </div>
-              {!done[task.code]&&<button onClick={()=>{markDone(task.code);addPoints("completeTask");}} style={{width:"100%",marginTop:12,padding:11,borderRadius:12,background:dom.color,color:C.white,border:"none",cursor:"pointer",fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:"13px"}}>Mark as learned</button>}
+              {!done[task.code]&&<button onClick={()=>{markDone(task.code);addPoints("completeTask");if(trackAction)trackAction("completeTask");}} style={{width:"100%",marginTop:12,padding:11,borderRadius:12,background:dom.color,color:C.white,border:"none",cursor:"pointer",fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:"13px"}}>Mark as learned</button>}
               {done[task.code]&&<div style={ss("13px",dom.color,700,{textAlign:"center",marginTop:10})}>Learned</div>}
             </div>
           )}
@@ -1409,7 +1489,7 @@ const RBT_DOMAINS=[
 ];
 
 // ── RBT Study Module Component ────────────────────────────────────
-function RBTStudyModule({onBack,done,markDone,addPoints}){
+function RBTStudyModule({onBack,done,markDone,addPoints,trackAction}){
   const [domain,setDomain]=useState(null);
   const [taskIdx,setTaskIdx]=useState(0);
   const [tab,setTab]=useState("learn");
@@ -1534,7 +1614,7 @@ function RBTStudyModule({onBack,done,markDone,addPoints}){
                 <div style={ss("9px",dom.color,700,{textTransform:"uppercase",letterSpacing:"0.08em",marginBottom:3})}>Pro tip:</div>
                 <p style={ss("12px",C.umber,400,{margin:0,lineHeight:1.65})}>{task.tip}</p>
               </div>
-              {!done[task.code]&&<button onClick={()=>{markDone(task.code);addPoints("completeTask");}} style={{width:"100%",marginTop:12,padding:11,borderRadius:12,background:dom.color,color:C.white,border:"none",cursor:"pointer",fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:"13px"}}>Mark as learned</button>}
+              {!done[task.code]&&<button onClick={()=>{markDone(task.code);addPoints("completeTask");if(trackAction)trackAction("completeTask");}} style={{width:"100%",marginTop:12,padding:11,borderRadius:12,background:dom.color,color:C.white,border:"none",cursor:"pointer",fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:"13px"}}>Mark as learned</button>}
               {done[task.code]&&<div style={ss("13px",dom.color,700,{textAlign:"center",marginTop:10})}>Learned</div>}
             </div>
           )}
@@ -1568,7 +1648,7 @@ const CAT_CONFIG={
   pause:        { label:"Pause & Reset", color:C.sage,   bg:`${C.sage}0A`  },
 };
 
-function LearnTab({saved,setSaved,addPoints,studyDone,markStudyDone}){
+function LearnTab({saved,setSaved,addPoints,studyDone,markStudyDone,trackAction}){
   const [mode,setMode]=useState("home");
   const [filter,setFilter]=useState("all");
   const [expanded,setExpanded]=useState(null);
@@ -1597,7 +1677,7 @@ function LearnTab({saved,setSaved,addPoints,studyDone,markStudyDone}){
           const cfg=CAT_CONFIG[msg.cat]||CAT_CONFIG.encouragement;
           const isExp=expanded===msg.id;
           return (
-            <div key={msg.id} onClick={()=>{setExpanded(isExp?null:msg.id);if(!isExp)addPoints("readMessage");}} style={{borderRadius:16,overflow:"hidden",background:C.white,border:`1.5px solid ${isExp?msg.color+"55":C.sand}`,boxShadow:isExp?`0 6px 18px ${msg.color}22`:`0 1px 6px ${C.sand}`,cursor:"pointer",transition:"all 0.3s"}}>
+            <div key={msg.id} onClick={()=>{setExpanded(isExp?null:msg.id);if(!isExp){addPoints("readMessage");trackAction("openMessage");}}} style={{borderRadius:16,overflow:"hidden",background:C.white,border:`1.5px solid ${isExp?msg.color+"55":C.sand}`,boxShadow:isExp?`0 6px 18px ${msg.color}22`:`0 1px 6px ${C.sand}`,cursor:"pointer",transition:"all 0.3s"}}>
               <div style={{height:3,background:`linear-gradient(90deg,${msg.color},${msg.color}44)`}}/>
               <div style={{padding:"14px 16px",background:cfg.bg}}>
                 <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start"}}>
@@ -1606,7 +1686,7 @@ function LearnTab({saved,setSaved,addPoints,studyDone,markStudyDone}){
                     <div style={ser("14px",C.bark,700,{lineHeight:1.3})}>{msg.title}</div>
                   </div>
                   <div style={{display:"flex",alignItems:"center",gap:6}}>
-                    <button onClick={e=>{e.stopPropagation();const ns=new Set(saved);ns.has(msg.id)?ns.delete(msg.id):ns.add(msg.id);setSaved(ns);if(!saved.has(msg.id))addPoints("saveMessage");}} style={{background:"none",border:"none",cursor:"pointer",fontSize:"15px",color:saved.has(msg.id)?C.copper:C.stone}}>
+                    <button onClick={e=>{e.stopPropagation();const ns=new Set(saved);ns.has(msg.id)?ns.delete(msg.id):ns.add(msg.id);setSaved(ns);if(!saved.has(msg.id)){addPoints("saveMessage");trackAction("saveMessage");}}} style={{background:"none",border:"none",cursor:"pointer",fontSize:"15px",color:saved.has(msg.id)?C.copper:C.stone}}>
                       {saved.has(msg.id)?"♥":"♡"}
                     </button>
                     <span style={ss("10px",C.stone)}>{isExp?"▲":"▼"}</span>
@@ -1636,12 +1716,13 @@ function LearnTab({saved,setSaved,addPoints,studyDone,markStudyDone}){
       done={studyDone}
       markDone={markStudyDone}
       addPoints={addPoints}
+      trackAction={trackAction}
     />;
   }
 
   // ── RBT + BT inline study module ──────────────────────────────────
   if(mode==="study_RBT"||mode==="study_BT"){
-    return <RBTStudyModule onBack={()=>setMode("study")} done={studyDone} markDone={markStudyDone} addPoints={addPoints}/>;
+    return <RBTStudyModule onBack={()=>setMode("study")} done={studyDone} markDone={markStudyDone} addPoints={addPoints} trackAction={trackAction}/>;
   }
 
   // Study module credential selector
@@ -1992,7 +2073,35 @@ export default function TheAntecedent(){
   const [pointsHistory,setPointsHistory]=useState(()=>LS.get("ta_history",[]));
   const [profile,setProfile]=useState(()=>LS.get("ta_profile",{name:"",role:"",org:"",favs:"",goal:"",certified:"",pursuing:"",credential:"",examDate:"",workStart:"",birthday:"",milestonesLogged:[]}));
   const [studyDone,setStudyDone]=useState(()=>LS.get("ta_study",{}));
+  const [dailyData,setDailyData]=useState(()=>getDailyData());
   const hasInit=useRef(false);
+
+  // Reset daily data if new day
+  useEffect(()=>{
+    const today=getTodayKey();
+    if(dailyData.date!==today){
+      const fresh={date:today,actions:[],notesUsed:0};
+      setDailyData(fresh);
+      saveDailyData(fresh);
+    }
+  },[]);
+
+  const trackAction=(actionKey)=>{
+    setDailyData(prev=>{
+      if(prev.actions.includes(actionKey)) return prev;
+      const updated={...prev,actions:[...prev.actions,actionKey]};
+      saveDailyData(updated);
+      return updated;
+    });
+  };
+
+  const useNoteCredit=()=>{
+    setDailyData(prev=>{
+      const updated={...prev,notesUsed:(prev.notesUsed||0)+1};
+      saveDailyData(updated);
+      return updated;
+    });
+  };
   const markStudyDone=(code)=>setStudyDone(p=>({...p,[code]:true}));
 
   // Persist all state to localStorage whenever it changes
@@ -2094,8 +2203,8 @@ export default function TheAntecedent(){
       <AppHeader points={points} profile={profile}/>
 
       <div style={{paddingBottom:70}}>
-        {tab==="home"      &&<HomeTab      profile={profile} points={points} addPoints={addPoints} setPopup={setPopup} saved={saved} setSaved={setSaved} setTab={setTab} onMilestone={handleMilestone}/>}
-        {tab==="learn"     &&<LearnTab     saved={saved} setSaved={setSaved} addPoints={addPoints} studyDone={studyDone} markStudyDone={markStudyDone}/>}
+        {tab==="home"      &&<HomeTab      profile={profile} points={points} addPoints={addPoints} setPopup={setPopup} saved={saved} setSaved={setSaved} setTab={setTab} onMilestone={handleMilestone} dailyData={dailyData} trackAction={trackAction} useNoteCredit={useNoteCredit}/>}
+        {tab==="learn"     &&<LearnTab     saved={saved} setSaved={setSaved} addPoints={addPoints} studyDone={studyDone} markStudyDone={markStudyDone} trackAction={trackAction}/>}
         {tab==="support"   &&<SupportTab   addPoints={addPoints}/>}
         {tab==="resources" &&<ResourcesTab addPoints={addPoints}/>}
         {tab==="me"        &&<MeTab        profile={profile} setProfile={setProfile} points={points} pointsHistory={pointsHistory} saved={saved}/>}
