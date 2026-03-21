@@ -862,17 +862,10 @@ Then write the POLISHED version — same content, more refined and elevated lang
     setLoading(true);
     setResult(null);
     try{
-      const res=await fetch("https://api.anthropic.com/v1/messages",{
+      const res=await fetch("/api/generate-note",{
         method:"POST",
-        headers:{
-          "Content-Type":"application/json",
-          "anthropic-dangerous-direct-browser-access":"true",
-        },
-        body:JSON.stringify({
-          model:"claude-sonnet-4-20250514",
-          max_tokens:1000,
-          messages:[{role:"user",content:buildPrompt()}],
-        }),
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({prompt:buildPrompt()}),
       });
       const data=await res.json();
       const text=data.content?.[0]?.text||"";
