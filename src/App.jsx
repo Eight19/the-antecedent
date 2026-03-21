@@ -762,6 +762,7 @@ const AFFIRMATIONS=[
 function HomeTab({profile,points,addPoints,setPopup,saved,setSaved,setTab,onMilestone}){
   const [mood,setMood]=useState(null);
   const [affIdx,setAffIdx]=useState(0);
+  const [lookbackNote,setLookbackNote]=useState(null);
   const poolRef=useRef([...MESSAGES]);
 
   useEffect(()=>{const t=setInterval(()=>setAffIdx(i=>(i+1)%AFFIRMATIONS.length),8000);return()=>clearInterval(t);},[]);
@@ -786,6 +787,23 @@ function HomeTab({profile,points,addPoints,setPopup,saved,setSaved,setTab,onMile
 
   return (
     <div style={{padding:"18px 16px 100px"}}>
+      {/* Lookback note popup */}
+      {lookbackNote&&(
+        <div onClick={()=>setLookbackNote(null)} style={{position:"fixed",inset:0,background:"rgba(30,15,5,0.55)",backdropFilter:"blur(6px)",zIndex:200,display:"flex",alignItems:"center",justifyContent:"center",padding:24}}>
+          <div onClick={e=>e.stopPropagation()} style={{width:"100%",maxWidth:370,background:C.ivory,borderRadius:24,boxShadow:`0 28px 70px rgba(30,15,5,0.3)`,padding:"28px 24px 22px",borderTop:`3px solid ${lookbackNote.color}`}}>
+            <div style={ss("9px",C.stone,500,{marginBottom:8})}>Day {lookbackNote.dayNum}</div>
+            <div style={ital("10px",C.dusk,400,{marginBottom:12})}>{lookbackNote.theme}</div>
+            <div style={ser("18px",C.bark,700,{marginBottom:14,lineHeight:1.35})}>{lookbackNote.title}</div>
+            <p style={ss("13px",C.umber,400,{margin:"0 0 20px",lineHeight:1.9})}>{lookbackNote.body}</p>
+            <div style={{display:"flex",gap:10}}>
+              <button onClick={()=>setLookbackNote(null)} style={{flex:1,padding:"11px 0",borderRadius:12,background:C.linen,border:`1px solid ${C.sand}`,cursor:"pointer",fontFamily:"'DM Sans',sans-serif",fontWeight:600,fontSize:"13px",color:C.umber}}>Close</button>
+              <button onClick={()=>{const ns=new Set(saved);ns.has(lookbackNote.id)?ns.delete(lookbackNote.id):ns.add(lookbackNote.id);setSaved(ns);if(!saved.has(lookbackNote.id))addPoints("saveMessage");}} style={{flex:1,padding:"11px 0",borderRadius:12,background:lookbackNote.color,border:"none",cursor:"pointer",fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:"13px",color:C.white}}>
+                {saved.has(lookbackNote.id)?"Saved":"Save note"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       {/* Affirmation strip */}
       <div style={{background:C.linen,borderRadius:14,padding:"12px 16px",marginBottom:14,borderLeft:`3px solid ${C.terra}`}}>
         <div style={ital("13px",C.umber,400,{lineHeight:1.6})}>{AFFIRMATIONS[affIdx]}</div>
@@ -861,13 +879,13 @@ function HomeTab({profile,points,addPoints,setPopup,saved,setSaved,setTab,onMile
           <div style={ss("10px",C.dusk,600,{textTransform:"uppercase",letterSpacing:"0.08em",marginBottom:8})}>Look back</div>
           <div style={{display:"flex",gap:8,overflowX:"auto",scrollbarWidth:"none",paddingBottom:4}}>
             {recentNotes.map(n=>(
-              <div key={n.id+n.dayNum} style={{flexShrink:0,width:180,background:C.white,borderRadius:14,padding:12,boxShadow:`0 1px 6px ${C.sand}`,borderTop:`2px solid ${n.color}`}}>
+              <div key={n.id+n.dayNum} onClick={()=>setLookbackNote(n)} style={{flexShrink:0,width:180,background:C.white,borderRadius:14,padding:12,boxShadow:`0 1px 6px ${C.sand}`,borderTop:`2px solid ${n.color}`,cursor:"pointer",transition:"box-shadow 0.2s"}}
+                onMouseEnter={e=>e.currentTarget.style.boxShadow=`0 4px 14px ${C.sand}`}
+                onMouseLeave={e=>e.currentTarget.style.boxShadow=`0 1px 6px ${C.sand}`}>
                 <div style={ss("8px",C.stone,500,{marginBottom:4})}>Day {n.dayNum}</div>
                 <div style={ss("11px",C.bark,600,{lineHeight:1.4,marginBottom:4})}>{n.title}</div>
-                <div style={ital("9px",C.dusk,400,{lineHeight:1.4})}>{n.theme}</div>
-                <button onClick={()=>{const ns=new Set(saved);ns.has(n.id)?ns.delete(n.id):ns.add(n.id);setSaved(ns);if(!saved.has(n.id))addPoints("saveMessage");}} style={{background:"none",border:"none",cursor:"pointer",fontSize:"13px",color:saved.has(n.id)?C.copper:C.stone,marginTop:6,display:"block"}}>
-                  {saved.has(n.id)?"♥":"♡"}
-                </button>
+                <div style={ital("9px",C.dusk,400,{lineHeight:1.4,marginBottom:6})}>{n.theme}</div>
+                <div style={ss("9px",n.color,500)}>Tap to read →</div>
               </div>
             ))}
           </div>
